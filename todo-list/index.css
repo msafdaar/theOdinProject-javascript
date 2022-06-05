@@ -1,0 +1,295 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(250, 250, 250);
+}
+
+#header {
+    width: 100%;
+    display: flex;
+    background-color: hsl(324, 100%, 40%);
+    font-size: 22px;
+    margin-bottom: 30px;
+    color: white;
+    border: 1px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#header h1 {
+    padding: 10px;
+}
+
+#header h2 {
+    padding: 10px;
+    min-width: 150px;
+
+}
+
+#hButtons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    flex: 1;
+    padding: 10px;
+}
+
+#hButtons button {
+    background-color: #fdffe1;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+#hButtons button:hover {
+    background-color: #ffd7ec;
+}
+
+#main {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+#groupNames {
+    width: 300px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.groupNamesSection {
+    margin-bottom: -1px;
+}
+
+.groupNamesItem {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.activeGroupNamesItem {
+    background-color: #e2e2e2;
+}
+
+.groupNamesItem:hover {
+    background-color: #ffd7ec;
+}
+
+.groupNamesItemNumber {
+    background-color: #ffd7ec;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+    #groupNames {
+        display: none;
+    }
+
+    #hButtons {
+        justify-content: flex-end;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #selectGroupButton {
+        display: none;
+    }
+}
+
+
+#tasksList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center;
+    gap: 15px 15px;
+}
+
+.taskSummary {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 15px;
+    gap: 15px;
+    width: 200px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    word-break: break-word;
+
+}
+
+@media screen and (max-width: 420px){
+    .taskSummary{
+        width: 45%;
+    }
+}
+.taskSummary:hover {
+    background-color: #fdffe1;
+}
+
+.priority {
+    background-color: #ffffff;
+    width: 20px;
+    height: 3px;
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+.priorityhigh {
+    background-color: hsl(0, 100%, 50%);
+    color: white;
+}
+
+.prioritymedium {
+    background-color: rgb(255, 208, 0);
+}
+
+.prioritylow {
+    background-color: rgb(15, 228, 79)
+}
+
+.taskDueDate {
+    flex: 1;
+    text-align: right;
+}
+
+.taskTitle {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.taskDescription {
+    width: 100%;
+    font-size: 15px;
+}
+
+.tasklastEdit {
+    font-size: 14px;
+    color: #6e6e6e;
+}
+
+.emptyGroup {
+    padding: 50px;
+}
+
+#dialogue {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+#dialogue-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 6px;
+}
+
+.titleInput {
+    font-size: 26px;
+    font-weight: 400;
+    border: none;
+}
+.titleInput:focus, .descriptionInput:focus{
+    border: none;
+    outline: none;
+}
+.descriptionInput {
+    font-family: Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    border: none;
+    height: 200px;
+    padding: 5px;
+}
+
+.inputGroup {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.labelAndInput {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+    color: #888;
+    gap: 5px;
+}
+
+.buttonsGroup {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.buttonsGroup button {
+    border: none;
+    background-color: hsl(324, 100%, 40%);
+    border: 1px solid hsl(324, 100%, 40%);
+    color: white;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 10px;
+}
+
+.buttonsGroup button:hover {
+    background: none;
+    border: 1px solid hsl(324, 100%, 40%);
+    color: #777;
+    cursor: pointer;
+}
+
+
+.labelAndInput input,
+.labelAndInput select {
+    width: 150px;
+    height: 25px;
+}
+
+.lastEditedExtended {
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    color: #888;
+}
