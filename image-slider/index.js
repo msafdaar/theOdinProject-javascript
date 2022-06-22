@@ -20,9 +20,42 @@ function initializeSlider(slider, sliderIndex){
         }
         shortcuts.appendChild(shortcut);
     }
+    //add eventhandlers to buttons
+    let buttons = slider.querySelectorAll(".slideButton")
+    buttons[0].dataset.sliderIndex = sliderIndex;
+    buttons[0].onclick = (event)=>{prevSlide(event.target.dataset.sliderIndex)}
+    buttons[1].dataset.sliderIndex = sliderIndex;
+    buttons[1].onclick = (event)=>{nextSlide(event.target.dataset.sliderIndex)}
+
     //display first slide in current slider
     showSlide(sliderIndex, 0);
 }                       
+
+function nextSlide(slider){
+    let activeSlide = sliders[slider].dataset.activeSlide;
+    activeSlide = activeSlide*1
+    let totalSlides = sliders[slider].querySelectorAll(".slide").length
+    let targetSlide;
+    if(activeSlide+1==totalSlides){
+        targetSlide = 0
+    } else{
+        targetSlide = activeSlide+1
+    }
+    showSlide(slider,targetSlide)
+}
+
+function prevSlide(slider){
+    let activeSlide = sliders[slider].dataset.activeSlide;
+    activeSlide = activeSlide*1
+    let totalSlides = sliders[slider].querySelectorAll(".slide").length
+    let targetSlide;
+    if(activeSlide==0){
+        targetSlide = totalSlides-1
+    } else{
+        targetSlide = activeSlide-1
+    }
+    showSlide(slider,targetSlide)
+}
 
 function showSlide(slider, targetSlide){
     slider = sliders[slider]; //slider in sliders array
