@@ -1,6 +1,11 @@
 //search for all elements with slider class, initialize them
 let sliders = document.querySelectorAll(".slider");
-initializeSlider(sliders[0], 0)
+sliders.forEach((slider,index)=>initializeSlider(slider, index))
+
+//auto change slide
+setInterval(()=>{
+    sliders.forEach((slider,index)=>{nextSlide(index)})}
+    ,4000)
 
 //add shortcut divs to change between slides
 function initializeSlider(slider, sliderIndex){

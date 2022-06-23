@@ -1,10 +1,22 @@
+body{
+    margin-top: 40px;
+}
 .slider{
-    border: 2px solid rgb(143, 143, 143);
+    border: 1px solid rgb(119, 96, 76);
     border-radius: 5px;
-    width: 500px;
+    width: 300px;
+    margin: 0 auto 0 auto;
+}
+.sliderTitle{
+    margin: 0;
+    width: 300px;
+    margin: 50px auto 10px auto;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: xx-large;
 }
 .sliderImages{
-    width: 500px;
+    width: 300px;
     overflow: hidden;
     display: flex;
 }
@@ -25,11 +37,11 @@ img{
     width: 100%;
 }
 .caption{
-    width: 100%;
-    height: 60px;
+    text-align: left;
+    width: 90%;
+
     font-size: 20px;
-    text-align: center;
-    padding: 5px;
+    padding: 20px;
 }
 
 .shortcuts, .buttons{
@@ -44,15 +56,35 @@ margin: 10px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid #000;
+    border: 1px solid #77604c;
     cursor: pointer;
 }
 .slideShortcut.active{
-    background-color: #000;
+    background-color: rgb(250, 202, 174);
+    border: 2px solid rgb(187, 104, 37);
     animation: fadeIn .3s;
 }
 
 .slideButton{
-    width: 100px;
+    background-color: #facaae;
+    border: 1px solid #bb6825;
+    color: #bb6825;
+    font-weight: bold;
+    font-size: 22px;
+    border-radius: 5px;
+    width: 70px;
     height: 30px;
+}
+
+.credits{
+    width: 300px;
+    margin: 10px auto 10px auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+a{
+    color: #bb6825;   
+}
+a:visited{
+    color: #77604c;      
 }
