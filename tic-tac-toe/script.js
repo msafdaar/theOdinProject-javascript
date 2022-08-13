@@ -225,4 +225,4 @@ const gameboard = (()=>{
 
 gameboard.displayPlayers();
 gameboard.displayGameboard();
-gameboard.toggelMessages();
+// gameboard.toggelMessages();
