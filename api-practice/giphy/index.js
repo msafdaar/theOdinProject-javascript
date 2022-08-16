@@ -2,7 +2,8 @@ document.querySelector("#searchButton").addEventListener("click", searchGiphy)
 
 function searchGiphy(){
 searchText = document.querySelector("#searchText").value;
-console.log(searchText)
+fetchGifs(searchText)
+.then((images)=>{loadGifs(images)})
 }
 
 function fetchGifs(text){
@@ -11,5 +12,14 @@ function fetchGifs(text){
   .then((response) => response.data)
 }
 
-let a = fetchGifs()
-a.then((response)=> console.log(response))
+function loadGifs(images){
+  let container = document.querySelector("#imagesContainer")
+  container.innerHTML = ""
+  images.forEach(gif => {
+    let url = gif.images.fixed_width.url;
+    let img = document.createElement("img");
+    img.src = url;
+    container.appendChild(img);
+  });
+}
+
