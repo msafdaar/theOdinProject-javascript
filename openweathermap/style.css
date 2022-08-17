@@ -1,0 +1,72 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(214, 255, 213);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+header{
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(255, 235, 213);
+}
+h1{
+    width: fit-content;
+    font-size: 12px;
+    margin: 0 auto 0 auto;
+}
+#searchContainer{
+    width: 100%;
+    border-bottom: 1px solid rgb(226, 119, 4);
+    display: flex;
+    justify-content: center;
+    background-color: rgb(255, 235, 213);
+    padding: 10px;
+}
+#searchContainer input, #searchContainer button{
+    border: 1px solid #000;
+}
+#searchContainer input{
+    padding: 5px 10px;
+    border-right: 0px;
+    border-right: 0px;
+    height: 25px;
+    font-size: 16px;
+}
+#weatherContainer{
+    font-size: 16px;
+    padding: 20px;
+}
+#weatherHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+#cityName{
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+figure{
+    text-align: center;
+}
+#weatherIcon{
+background-color: rgb(83, 218, 105);
+border-radius: 100%;
+border: 2px solid rgb(37, 117, 50);
+}
+.weatherSection{
+    background-color: rgb(239, 255, 239);
+    padding: 20px 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+h2{
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
