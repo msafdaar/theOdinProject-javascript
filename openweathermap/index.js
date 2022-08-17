@@ -8,7 +8,7 @@ document.querySelector("#searchText").addEventListener("keypress", function(even
 
 
 function searchWeather(){
-searchText = document.querySelector("#searchText").value;
+searchText = document.querySelector("#searchText").value.trim();
 fetchWeather(searchText)
 .then((response)=>{loadWeather(response)})
 }
@@ -27,7 +27,7 @@ function loadWeather(apiResponse){
   <div id="weatherHead">
       <div>
           <div id="cityName">${apiResponse.name}, ${apiResponse.sys.country}</div>
-          <div>${apiResponse.main.temp}, Feels like ${apiResponse.main.feels_like}</div>
+          <div>${apiResponse.main.temp}c, feels like ${apiResponse.main.feels_like}c</div>
       </div>
           <figure>
               <img src="http://openweathermap.org/img/wn/${apiResponse.weather[0].icon}@2x.png" alt="weather-icon" id="weatherIcon">

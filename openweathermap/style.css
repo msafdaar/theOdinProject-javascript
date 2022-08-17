@@ -56,9 +56,9 @@ figure{
     text-align: center;
 }
 #weatherIcon{
-background-color: rgb(83, 218, 105);
-border-radius: 100%;
-border: 2px solid rgb(37, 117, 50);
+background-color: #7dcbff;
+border-radius: 50%;
+border: 2px solid rgb(60, 122, 163);
 }
 .weatherSection{
     background-color: rgb(239, 255, 239);
