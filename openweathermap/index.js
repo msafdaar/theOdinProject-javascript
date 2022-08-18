@@ -34,28 +34,6 @@ function fetchForecastWeather(city){
   .then((response)=> response.json())
 }
 
-function loadForecastWeather(apiResponse){
-  let container = document.querySelector("#forecastContainer")
-  container.innerHTML = ""
-  apiResponse.list.forEach((forecast)=>{
-    let section = document.createElement("div");
-    section.classList.add("forecastSection");
-    section.innerHTML =`            
-    <div class="forecast-date">${forecast.dt}</div>            
-    <div class="forecast-time">${forecast.dt}</div>            
-    <div class="forecast-description">${Math.round(forecast.main.temp_min)}-${Math.round(forecast.main.temp_max)}c</div>
-    <div class="forecast-description">feels ${Math.round(forecast.main.feels_like)}c</div>
-    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="weather-icon">
-    <div class="forecast-description">${forecast.weather[0].description}</div>
-    <br>
-    <div class="forecast-description">${forecast.wind.speed} Kmph ${getCardinal(forecast.wind.deg)}</div>
-    <div class="forecast-description">${forecast.clouds.all}% clouds</div>
-    `
-    container.appendChild(section);
-  })
-}
-
-//load fetched data to dom using template string
 function loadCurrentWeather(apiResponse){
   let container = document.querySelector("#weatherContainer")
   container.innerHTML = ""
@@ -71,7 +49,7 @@ function loadCurrentWeather(apiResponse){
           </figure>
   </div>
   <div class="weatherSection">
-      <h2>Details</h2>
+      <h2>Current Weather</h2>
       <div>Humidity: ${apiResponse.main.humidity}%</div>
       <div>Clouds: ${apiResponse.clouds.all}%</div>
       <br>
@@ -84,15 +62,62 @@ function loadCurrentWeather(apiResponse){
   <div id="forecastContainer"></div>
   </div>
   <div class="weatherSection">
-      <h2>Timezones</h2>
-      <div>Local Time in ${apiResponse.name} (GMT ${apiResponse.timezone/3600}): ${apiResponse.timezone}</div>
+      <h2>Time</h2>
+      <div>Sunrise: ${formatDate(apiResponse.sys.sunrise).hours}:${formatDate(apiResponse.sys.sunrise).minutes} ${formatDate(apiResponse.sys.sunset).ampm} (converted to your timezone)</div>
       <br>
-      <div>Sunrise: ${(apiResponse.sys.sunrise)}</div>
+      <div>Sunset: ${formatDate(apiResponse.sys.sunset).hours}:${formatDate(apiResponse.sys.sunset).minutes} ${formatDate(apiResponse.sys.sunset).ampm} (converted to your timezone)</div>
       <br>
-      <div>Sunset: ${(apiResponse.sys.sunset)}</div>
+      <div>Local Time in ${apiResponse.name} (GMT ${apiResponse.timezone/3600}): ${localDate(apiResponse.timezone)}</div>
   </div>
 `}
 
+function loadForecastWeather(apiResponse){
+  let container = document.querySelector("#forecastContainer")
+  container.innerHTML = ""
+  apiResponse.list.forEach((forecast)=>{
+    let section = document.createElement("div");
+    section.classList.add("forecastSection");
+    section.innerHTML =`            
+    <div class="forecast-date">${formatDate(forecast.dt).day} ${formatDate(forecast.dt).month}</div>            
+    <div class="forecast-time">${formatDate(forecast.dt).hours} ${formatDate(forecast.dt).ampm}</div>            
+    <div class="forecast-description">${Math.round(forecast.main.temp_min)}-${Math.round(forecast.main.temp_max)}c</div>
+    <div class="forecast-description">feels ${Math.round(forecast.main.feels_like)}c</div>
+    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="weather-icon">
+    <div class="forecast-description">${forecast.weather[0].description}</div>
+    <br>
+    <div class="forecast-description">${forecast.wind.speed} Kmph ${getCardinal(forecast.wind.deg)}</div>
+    <div class="forecast-description">${forecast.clouds.all}% clouds</div>
+    `
+    container.appendChild(section);
+  })
+}
+
+function formatDate(unix){
+  unix = unix*1000
+  let date = new Date(unix)
+  let year = date.getFullYear()
+  let month = date.toLocaleString('default', { month: 'short'})
+  let day = date.toLocaleString('default', {day:'numeric'})
+  let hours = date.getHours()
+  let minutes = date.getMinutes()
+  let seconds = date.getSeconds()
+  let ampm = hours >= 12 ? 'PM' : 'AM';
+  if(hours>12){
+    hours = hours-12
+  }
+  if(minutes<10){
+    minutes = `0${minutes}`
+  }
+  return {year, day, month, hours, minutes, seconds, ampm}
+}
+
+function localDate(timezoneSecs){
+now = new Date().getTime()
+timezone = timezoneSecs*1000
+timeOffset = new Date().getTimezoneOffset()*60*1000
+nowLocal = formatDate((now+timeOffset+timezone)/1000)
+return `${nowLocal.hours}:${nowLocal.minutes} ${nowLocal.ampm} - ${nowLocal.day} ${nowLocal.month} ${nowLocal.year}`
+}
 // Copied from Github
 function getCardinal(angle) {
     const degreePerDirection = 360 / 8;
