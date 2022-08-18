@@ -8,19 +8,55 @@ document.querySelector("#searchText").addEventListener("keypress", function(even
 
 
 function searchWeather(){
+document.querySelector("#loadingContainer").classList.remove("hidden")
 searchText = document.querySelector("#searchText").value.trim();
-fetchWeather(searchText)
-.then((response)=>{loadWeather(response)})
+fetchCurrentWeather(searchText)
+.then((response)=>{loadCurrentWeather(response)})
+.then(()=>fetchForecastWeather(searchText))
+.then((response)=>{loadForecastWeather(response)})
+.then(()=>document.querySelector("#loadingContainer").classList.add("hidden"))
+.catch(()=>{
+  document.querySelector("#loadingContainer").classList.add("hidden")
+  let container = document.querySelector("#weatherContainer")
+  container.innerHTML = "Something went wrong. Try Searching again."
+}
+)
 }
 
 //fetch from api
-function fetchWeather(city){
+function fetchCurrentWeather(city){
   return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=066c24b1dbef5e109839495c0f1bdec7&units=metric`)
   .then((response)=> response.json())
 }
 
+function fetchForecastWeather(city){
+  return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=066c24b1dbef5e109839495c0f1bdec7&units=metric`)
+  .then((response)=> response.json())
+}
+
+function loadForecastWeather(apiResponse){
+  let container = document.querySelector("#forecastContainer")
+  container.innerHTML = ""
+  apiResponse.list.forEach((forecast)=>{
+    let section = document.createElement("div");
+    section.classList.add("forecastSection");
+    section.innerHTML =`            
+    <div class="forecast-date">${forecast.dt}</div>            
+    <div class="forecast-time">${forecast.dt}</div>            
+    <div class="forecast-description">${Math.round(forecast.main.temp_min)}-${Math.round(forecast.main.temp_max)}c</div>
+    <div class="forecast-description">feels ${Math.round(forecast.main.feels_like)}c</div>
+    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="weather-icon">
+    <div class="forecast-description">${forecast.weather[0].description}</div>
+    <br>
+    <div class="forecast-description">${forecast.wind.speed} Kmph ${getCardinal(forecast.wind.deg)}</div>
+    <div class="forecast-description">${forecast.clouds.all}% clouds</div>
+    `
+    container.appendChild(section);
+  })
+}
+
 //load fetched data to dom using template string
-function loadWeather(apiResponse){
+function loadCurrentWeather(apiResponse){
   let container = document.querySelector("#weatherContainer")
   container.innerHTML = ""
   container.innerHTML = `
@@ -44,15 +80,18 @@ function loadWeather(apiResponse){
       <div>Wind Gust: ${apiResponse.wind.gust} Kmph</div>
   </div>
   <div class="weatherSection">
-      <h2>Time</h2>
-      <div>Local Time in ${apiResponse.name} (GMT ${apiResponse.timezone/3600}): ${localTime(apiResponse.timezone)}</div>
-      <br>
-      <div>Sunrise: ${new Date(apiResponse.sys.sunrise*1000).toTimeString()}</div>
-      <br>
-      <div>Sunset: ${new Date(apiResponse.sys.sunset*1000).toTimeString()}</div>
+  <h2>5 Days Forecast</h2>
+  <div id="forecastContainer"></div>
   </div>
-`
-}
+  <div class="weatherSection">
+      <h2>Timezones</h2>
+      <div>Local Time in ${apiResponse.name} (GMT ${apiResponse.timezone/3600}): ${apiResponse.timezone}</div>
+      <br>
+      <div>Sunrise: ${(apiResponse.sys.sunrise)}</div>
+      <br>
+      <div>Sunset: ${(apiResponse.sys.sunset)}</div>
+  </div>
+`}
 
 // Copied from Github
 function getCardinal(angle) {
@@ -68,11 +107,3 @@ function getCardinal(angle) {
                 : (offsetAngle >= 6 * degreePerDirection && offsetAngle < 7 * degreePerDirection) ? "W"
                   : "NW";
   }
-
-// Copied from stackoverflow
-function localTime(timezoneInSecs){
-    var d = new Date();
-    var utc = d.getTime();
-    var localDate = new Date(utc + (1000*timezoneInSecs));
-    return localDate.toUTCString().replace("GMT", "")
-}
