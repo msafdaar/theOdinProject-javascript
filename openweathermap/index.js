@@ -54,8 +54,8 @@ function loadCurrentWeather(apiResponse){
       <div>Clouds: ${apiResponse.clouds.all}%</div>
       <br>
       <div>Wind Direction: ${getCardinal(apiResponse.wind.deg)}</div>
-      <div>Wind Speed: ${apiResponse.wind.speed} Kmph</div>
-      <div>Wind Gust: ${apiResponse.wind.gust} Kmph</div>
+      <div>Wind Speed: ${apiResponse.wind.speed} km/h</div>
+      <div>Wind Gust: ${apiResponse.wind.gust} km/h</div>
   </div>
   <div class="weatherSection">
   <h2>5 Days Forecast</h2>
@@ -85,7 +85,7 @@ function loadForecastWeather(apiResponse){
     <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="weather-icon">
     <div class="forecast-description">${forecast.weather[0].description}</div>
     <br>
-    <div class="forecast-description">${forecast.wind.speed} Kmph ${getCardinal(forecast.wind.deg)}</div>
+    <div class="forecast-description">${forecast.wind.speed} km/h ${getCardinal(forecast.wind.deg)}</div>
     <div class="forecast-description">${forecast.clouds.all}% clouds</div>
     `
     container.appendChild(section);
@@ -123,12 +123,12 @@ function getCardinal(angle) {
     const degreePerDirection = 360 / 8;
     const offsetAngle = angle + degreePerDirection / 2;
   
-    return (offsetAngle >= 0 * degreePerDirection && offsetAngle < 1 * degreePerDirection) ? "N"
-      : (offsetAngle >= 1 * degreePerDirection && offsetAngle < 2 * degreePerDirection) ? "NE"
-        : (offsetAngle >= 2 * degreePerDirection && offsetAngle < 3 * degreePerDirection) ? "E"
-          : (offsetAngle >= 3 * degreePerDirection && offsetAngle < 4 * degreePerDirection) ? "SE"
-            : (offsetAngle >= 4 * degreePerDirection && offsetAngle < 5 * degreePerDirection) ? "S"
-              : (offsetAngle >= 5 * degreePerDirection && offsetAngle < 6 * degreePerDirection) ? "SW"
-                : (offsetAngle >= 6 * degreePerDirection && offsetAngle < 7 * degreePerDirection) ? "W"
-                  : "NW";
+    return (offsetAngle >= 0 * degreePerDirection && offsetAngle < 1 * degreePerDirection) ? "↑ n"
+      : (offsetAngle >= 1 * degreePerDirection && offsetAngle < 2 * degreePerDirection) ? "↗ ne"
+        : (offsetAngle >= 2 * degreePerDirection && offsetAngle < 3 * degreePerDirection) ? "→ e"
+          : (offsetAngle >= 3 * degreePerDirection && offsetAngle < 4 * degreePerDirection) ? "↘ se"
+            : (offsetAngle >= 4 * degreePerDirection && offsetAngle < 5 * degreePerDirection) ? "↓ s"
+              : (offsetAngle >= 5 * degreePerDirection && offsetAngle < 6 * degreePerDirection) ? "↙ sw"
+                : (offsetAngle >= 6 * degreePerDirection && offsetAngle < 7 * degreePerDirection) ? "← w"
+                  : "↖ nw";
   }
