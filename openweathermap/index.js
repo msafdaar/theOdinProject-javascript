@@ -41,7 +41,7 @@ function loadCurrentWeather(apiResponse){
   <div id="weatherHead">
       <div>
           <div id="cityName">${apiResponse.name}, ${apiResponse.sys.country}</div>
-          <div>${apiResponse.main.temp}c, feels like ${apiResponse.main.feels_like}c</div>
+          <div>${Math.round(apiResponse.main.temp)}c, feels like ${Math.round(apiResponse.main.feels_like)}c</div>
       </div>
           <figure>
               <img src="http://openweathermap.org/img/wn/${apiResponse.weather[0].icon}@2x.png" alt="weather-icon" id="weatherIcon">
