@@ -1,0 +1,62 @@
+@media print {
+    .cvPrint {
+        background-color: white;
+        height: 100%;
+        width: 90%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        font-size: 14px;
+    }
+}
+
+.cvPrint{
+    background-color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 60px;
+}
+.nameAndTitle{
+    display: flex;
+    align-items: flex-end;
+}
+.nameAndTitle .name{
+    font-size: 48px;
+    color: #0e183d;
+    font-weight: 600;
+}
+.nameAndTitle .title{
+    font-size: 36px;
+    margin-left: 20px;
+    color: #474747;
+}
+.cvPrint .contact{
+    margin: 10px 0 50px 0;
+}
+.cvPrint .subHeading{
+    color: #45b2be;
+    font-size: 22px;
+    padding: 2px;
+}
+
+.cvPrint .section{
+margin: 0 0 30px 0;
+}
+.cvPrint .heading{
+    color: #0e183d;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.cvPrint .subsection{
+    margin: 20px 0;
+}
+.cvPrint .subsectionTitle{
+    display: flex;
+    font-weight: 600;
+}
+.cvPrint .subsectionDetails{
+padding: 5px;
+font-size: 16px;
+line-height: 20px;
+}

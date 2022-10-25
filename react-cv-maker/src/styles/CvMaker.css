@@ -1,0 +1,17 @@
+body{
+    background-color: #c8f5df;
+    padding: 20px;
+}
+
+.title{
+    font-size: 48px;
+}
+
+.CVHeader{
+    text-align: center;
+    padding: 20px;
+}
+a{
+    color: rgb(209, 136, 0);
+}
+
