@@ -4,19 +4,45 @@ import CVForm from "./CVForm";
 import CVHeader from "./CVHeader";
 import CVView from "./CVView";
 
+//placeholder values filled by default
+let defaultPresonal = {
+        name:"Lorem ipsum ",
+        title:"dolor sit amet ",
+        bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        email:"adipiscing@eiusmod.com",
+        phone:"+2 300 123 4567",
+        adress:"Magni dolores eos qui ratione voluptatem sequi nesciunt."};
+
+let defaultEducation = [
+    {
+        institue: "Eiusmod tempor incididunt ut labore",
+        degree: "Commodo consequat",
+        from: "1972",
+        to:"1975",
+        optional:"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+    }
+    ];
+
+let defaultWork = [
+    {
+        company: "Cillum dolore", 
+        role: "Est laborum", 
+        from: "1970", 
+        to:"1992", 
+        optional:"Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur"
+    }
+    ]
 
 class CvMaker extends Component {
     constructor(props){
         super(props);
         this.state = {
             editMode: true,
-            personalData: {name:"Imran Khan", title:"politician ", bio:"Imran Ahmed Khan Niazi HI(M) PP (Pashto, Punjabi, Urdu: عمران احمد خان نیازی; born 5 October 1952) is a Pakistani politician and former cricketer. Born to a Niazi Pashtun family in Lahore, Khan graduated from England's Keble College in 1975. He began his international cricket career at age 18, in a 1971 Test series against England. Khan played until 1992, served as the team's captain intermittently between 1982 and 1992,[5] and won the 1992 Cricket World Cup, in what is Pakistan's first and only victory in the competition.", email:"imrankhan@undefined.com", phone:"+92 3001234567", adress:"Bani Gala, Islamabad, Pakistan"},
-            educationData: [{institue: "Keble College, Oxford", degree: "Philosophy, Politics and Economics", from: "1972", to:"1975", optional:"He enrolled in Keble College, Oxford where he studied Philosophy, Politics and Economics, graduating in 1975.An enthusiast for college cricket at Keble, Paul Hayes, was instrumental in securing the admission of Khan, after he had been turned down by Cambridge."},],
-            workData: [{company: "International Player", role: "Cricket", from: "1970", to:"1992", optional:"In 1987 in India, Khan led Pakistan in its first-ever Test series win and this was followed by Pakistan's first series victory in England during the same year. Khan's career-high as a captain and cricketer came when he led Pakistan to victory in the 1992 Cricket World Cup."},
-                     {company: "Pakistan", role: "Prime Minister", from: "2018", to:"2022", optional:"Served as the 22nd prime minister of Pakistan from August 2018 until April 2022, when he was ousted through a no-confidence motion. He is the founder and chairman of the Pakistan Tehreek-e-Insaf (PTI), one of the largest political parties in the country."},],
+            personalData: defaultPresonal,
+            educationData: defaultEducation,
+            workData: defaultWork,
             editMode: false,
         }
-
     }
 
     render(){
