@@ -1,73 +1,70 @@
-import React from "react";
-import { Component } from "react";
+import React, {useState} from "react";
 import CVForm from "./CVForm";
 import CVHeader from "./CVHeader";
 import CVView from "./CVView";
 
+//placeholder values filled by default
+let defaultPersonal = {
+        name:"Lorem ipsum ",
+        title:"dolor sit amet ",
+        bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        email:"adipiscing@eiusmod.com",
+        phone:"+2 300 123 4567",
+        adress:"Magni dolores eos qui ratione voluptatem sequi nesciunt."};
 
-class CvMaker extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            editMode: true,
-            personalData: {name:"Imran Khan", title:"politician ", bio:"Imran Ahmed Khan Niazi HI(M) PP (Pashto, Punjabi, Urdu: عمران احمد خان نیازی; born 5 October 1952) is a Pakistani politician and former cricketer. Born to a Niazi Pashtun family in Lahore, Khan graduated from England's Keble College in 1975. He began his international cricket career at age 18, in a 1971 Test series against England. Khan played until 1992, served as the team's captain intermittently between 1982 and 1992,[5] and won the 1992 Cricket World Cup, in what is Pakistan's first and only victory in the competition.", email:"imrankhan@undefined.com", phone:"+92 3001234567", adress:"Bani Gala, Islamabad, Pakistan"},
-            educationData: [{institue: "Keble College, Oxford", degree: "Philosophy, Politics and Economics", from: "1972", to:"1975", optional:"He enrolled in Keble College, Oxford where he studied Philosophy, Politics and Economics, graduating in 1975.An enthusiast for college cricket at Keble, Paul Hayes, was instrumental in securing the admission of Khan, after he had been turned down by Cambridge."},],
-            workData: [{company: "International Player", role: "Cricket", from: "1970", to:"1992", optional:"In 1987 in India, Khan led Pakistan in its first-ever Test series win and this was followed by Pakistan's first series victory in England during the same year. Khan's career-high as a captain and cricketer came when he led Pakistan to victory in the 1992 Cricket World Cup."},
-                     {company: "Pakistan", role: "Prime Minister", from: "2018", to:"2022", optional:"Served as the 22nd prime minister of Pakistan from August 2018 until April 2022, when he was ousted through a no-confidence motion. He is the founder and chairman of the Pakistan Tehreek-e-Insaf (PTI), one of the largest political parties in the country."},],
-            editMode: false,
-        }
-
+let defaultEducation = [
+    {
+        institue: "Eiusmod tempor incididunt ut labore",
+        degree: "Commodo consequat",
+        from: "1972",
+        to:"1975",
+        optional:"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
     }
+    ];
 
-    render(){
-        return <div>
-            <CVHeader></CVHeader>
-            {this.state.editMode == true &&
-            <CVForm
-            personalData = {this.state.personalData} 
-            educationData = {this.state.educationData}
-            workData = {this.state.workData}
-            changeHandler = {this.handleFormInput}
-            ></CVForm>
-            }
-            {this.state.editMode == false &&
-            <CVView
-            personalData = {this.state.personalData} 
-            educationData = {this.state.educationData}
-            workData = {this.state.workData}
-            >
-            </CVView>
-            }
-            <div className="footer">
-            <button className='footerButton' onClick={this.toggleForm}>{this.state.editMode ? 'Save' : 'Edit'}</button>
-            </div>
-        </div>
+let defaultWork = [
+    {
+        company: "Cillum dolore", 
+        role: "Est laborum", 
+        from: "1970", 
+        to:"1992", 
+        optional:"Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur"
     }
-    toggleForm = ()=>{
-        window. scrollTo(0,0) 
-        if(this.state.editMode == true){
-            this.setState({editMode: false});
+    ]
+
+let CvMaker = ()=>{
+    let [personalData, setPersonalData]= useState(defaultPersonal);
+    let [educationData, setEducationData]= useState(defaultEducation);
+    let [workData, setWorkData]= useState(defaultWork);
+    let [editMode, setEditMode]= useState(false)
+    
+    let toggleForm = ()=>{
+        window.scrollTo(0,0) 
+        if(editMode == true){
+            setEditMode(false);
         }else{
-            this.setState({editMode: true});
+            setEditMode(true);
         }
     }
-    handleFormInput = (e)=>{
+
+   let handleFormInput = (e)=>{
         e.preventDefault();
         let type = e.target.getAttribute("input-type")
         if(type === "personal"){
-            this.handlePersonalInput(e);
+            handlePersonalInput(e);
             return
         } else if (type === "education"){
-            this.handleEducationInput(e);
+            handleEducationInput(e);
         } else if (type === "work"){
-            this.handleWorkInput(e);
+            handleWorkInput(e);
         }
-    }
-    handleWorkInput = (e)=>{
+    } 
+    
+        let handleWorkInput = (e)=>{
         let group = e.target.getAttribute("input-group-index")
         let key = e.target.getAttribute("input-key")
         let value = e.target.value;
-        let newState = [...this.state.workData];
+        let newState = [...workData];
         if(key === "remove"){
             newState = newState.filter((_, index) => index != group)
         } else if(key === "add"){
@@ -76,14 +73,14 @@ class CvMaker extends Component {
             newState[group][key] = value;
         }
 
-        this.setState({workData: newState})
+        setWorkData(newState);
     }
 
-    handleEducationInput = (e)=>{
+    let handleEducationInput = (e)=>{
         let group = e.target.getAttribute("input-group-index")
         let key = e.target.getAttribute("input-key")
         let value = e.target.value;
-        let newState = [...this.state.educationData];
+        let newState = [...educationData];
         if(key === "remove"){
             newState = newState.filter((_, index) => index != group)
         } else if(key === "add"){
@@ -92,17 +89,38 @@ class CvMaker extends Component {
             newState[group][key] = value;
         }
 
-        this.setState({educationData: newState})
+        setEducationData(newState);
     }
 
-    handlePersonalInput = (e)=>{
+    let handlePersonalInput = (e)=>{
         let key = e.target.getAttribute("input-key")
         let value = e.target.value;
-        let newState = {...this.state.personalData};
+        let newState = {...personalData};
         newState[key] = value;
-        this.setState({personalData: newState})
+        setPersonalData(newState)
     }
     
+    return <div>
+    <CVHeader></CVHeader>
+    {editMode == true &&
+    <CVForm
+    personalData = {personalData} 
+    educationData = {educationData}
+    workData = {workData}
+    changeHandler = {handleFormInput}
+    ></CVForm>
+    }
+    {editMode == false &&
+    <CVView
+    personalData = {personalData} 
+    educationData = {educationData}
+    workData = {workData}
+    >
+    </CVView>
+    }
+    <div className="footer">
+    <button className='footerButton' onClick={toggleForm}>{editMode ? 'Save' : 'Edit'}</button>
+    </div>
+</div>
 }
-
 export default CvMaker;
