@@ -1,11 +1,10 @@
-import React from "react";
-import { Component } from "react";
+import React, {useState} from "react";
 import CVForm from "./CVForm";
 import CVHeader from "./CVHeader";
 import CVView from "./CVView";
 
 //placeholder values filled by default
-let defaultPresonal = {
+let defaultPersonal = {
         name:"Lorem ipsum ",
         title:"dolor sit amet ",
         bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -33,67 +32,39 @@ let defaultWork = [
     }
     ]
 
-class CvMaker extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            editMode: true,
-            personalData: defaultPresonal,
-            educationData: defaultEducation,
-            workData: defaultWork,
-            editMode: false,
+let CvMaker = ()=>{
+    let [personalData, setPersonalData]= useState(defaultPersonal);
+    let [educationData, setEducationData]= useState(defaultEducation);
+    let [workData, setWorkData]= useState(defaultWork);
+    let [editMode, setEditMode]= useState(false)
+    
+    let toggleForm = ()=>{
+        window.scrollTo(0,0) 
+        if(editMode == true){
+            setEditMode(false);
+        }else{
+            setEditMode(true);
         }
     }
 
-    render(){
-        return <div>
-            <CVHeader></CVHeader>
-            {this.state.editMode == true &&
-            <CVForm
-            personalData = {this.state.personalData} 
-            educationData = {this.state.educationData}
-            workData = {this.state.workData}
-            changeHandler = {this.handleFormInput}
-            ></CVForm>
-            }
-            {this.state.editMode == false &&
-            <CVView
-            personalData = {this.state.personalData} 
-            educationData = {this.state.educationData}
-            workData = {this.state.workData}
-            >
-            </CVView>
-            }
-            <div className="footer">
-            <button className='footerButton' onClick={this.toggleForm}>{this.state.editMode ? 'Save' : 'Edit'}</button>
-            </div>
-        </div>
-    }
-    toggleForm = ()=>{
-        window. scrollTo(0,0) 
-        if(this.state.editMode == true){
-            this.setState({editMode: false});
-        }else{
-            this.setState({editMode: true});
-        }
-    }
-    handleFormInput = (e)=>{
+   let handleFormInput = (e)=>{
         e.preventDefault();
         let type = e.target.getAttribute("input-type")
         if(type === "personal"){
-            this.handlePersonalInput(e);
+            handlePersonalInput(e);
             return
         } else if (type === "education"){
-            this.handleEducationInput(e);
+            handleEducationInput(e);
         } else if (type === "work"){
-            this.handleWorkInput(e);
+            handleWorkInput(e);
         }
-    }
-    handleWorkInput = (e)=>{
+    } 
+    
+        let handleWorkInput = (e)=>{
         let group = e.target.getAttribute("input-group-index")
         let key = e.target.getAttribute("input-key")
         let value = e.target.value;
-        let newState = [...this.state.workData];
+        let newState = [...workData];
         if(key === "remove"){
             newState = newState.filter((_, index) => index != group)
         } else if(key === "add"){
@@ -102,14 +73,14 @@ class CvMaker extends Component {
             newState[group][key] = value;
         }
 
-        this.setState({workData: newState})
+        setWorkData(newState);
     }
 
-    handleEducationInput = (e)=>{
+    let handleEducationInput = (e)=>{
         let group = e.target.getAttribute("input-group-index")
         let key = e.target.getAttribute("input-key")
         let value = e.target.value;
-        let newState = [...this.state.educationData];
+        let newState = [...educationData];
         if(key === "remove"){
             newState = newState.filter((_, index) => index != group)
         } else if(key === "add"){
@@ -118,17 +89,38 @@ class CvMaker extends Component {
             newState[group][key] = value;
         }
 
-        this.setState({educationData: newState})
+        setEducationData(newState);
     }
 
-    handlePersonalInput = (e)=>{
+    let handlePersonalInput = (e)=>{
         let key = e.target.getAttribute("input-key")
         let value = e.target.value;
-        let newState = {...this.state.personalData};
+        let newState = {...personalData};
         newState[key] = value;
-        this.setState({personalData: newState})
+        setPersonalData(newState)
     }
     
+    return <div>
+    <CVHeader></CVHeader>
+    {editMode == true &&
+    <CVForm
+    personalData = {personalData} 
+    educationData = {educationData}
+    workData = {workData}
+    changeHandler = {handleFormInput}
+    ></CVForm>
+    }
+    {editMode == false &&
+    <CVView
+    personalData = {personalData} 
+    educationData = {educationData}
+    workData = {workData}
+    >
+    </CVView>
+    }
+    <div className="footer">
+    <button className='footerButton' onClick={toggleForm}>{editMode ? 'Save' : 'Edit'}</button>
+    </div>
+</div>
 }
-
 export default CvMaker;
