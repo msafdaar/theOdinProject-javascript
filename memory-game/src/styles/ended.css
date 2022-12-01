@@ -1,0 +1,19 @@
+.endedScreen{
+    border: 2px solid rgb(180, 0, 0);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.endedScreen .title{
+    font-size: 22px;
+}
+.endedScreen .score{
+    font-size: 22px;
+}
+
+.endedScreen button{
+    padding: 5px 10px;
+}

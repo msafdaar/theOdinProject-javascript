@@ -1,0 +1,35 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.game{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    font-family: sans-serif;
+}
+
+.logo{
+    text-align: center;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.logoTitle{
+    font-size: 30px;
+}
+.logoDescription{
+    width: fit-content;
+    padding: 5px 10px;
+    margin-top: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(209, 27, 154);
+    font-weight: bold;
+}

@@ -15,7 +15,7 @@ const MemoryGame = ()=>{
       
     let startGame = (e)=>{
         //assign available fruits according to difficulty selected.
-        let difficulty = e.target.dataset.difficulty;
+        let difficulty = e.currentTarget.dataset.difficulty;
         let fruitsQty = 0;
         if(difficulty === "easy"){
             fruitsQty = 9;
@@ -25,7 +25,45 @@ const MemoryGame = ()=>{
             fruitsQty = 30;
         }
 
-        let allFruits = ["mango","banana","orange","chili","salt","fish","burger","eggs","peas","gajaar","aloo","amatar","gobhi","roti","bread","butter","doodh","dahi","watermelon","chicken","dog","pig","beef"];
+        let allFruits = [
+            "apple",
+            "apricot",
+            "avocado",
+            "banana",
+            "beetroot",
+            "blackberry",
+            "blueberry",
+            "brinjal",
+            "broccoli",
+            "cabbage",
+            "capsicum",
+            "carrot",
+            "cauliflower",
+            "coconut",
+            "corn",
+            "cucumber",
+            "dragonfruit",
+            "gooseberry",
+            "grapes",
+            "jackfruit",
+            "kiwifruit",
+            "lady-finger",
+            "mango",
+            "mushroom",
+            "orange",
+            "papaya",
+            "peach",
+            "peas",
+            "pineapple",
+            "pomegranate",
+            "potato",
+            "pumpkin",
+            "spinach",
+            "strawberry",
+            "sweetpotato",
+            "tomato",
+            "watermelon"
+        ];
         let availableFruits = getUniqueRandoms(allFruits, fruitsQty)
         let pickedFruits = [];
         let screen = "choose";
@@ -34,7 +72,7 @@ const MemoryGame = ()=>{
 
 
     let fruitChoosen = (e)=>{
-       let choice = e.target.dataset.fruitName;
+       let choice = e.currentTarget.dataset.fruitName;
        //on correct choice
        //move the fruit from available to picked, update state and show choose screen again
         if(gameData.availableFruits.indexOf(choice) !== -1){
@@ -72,7 +110,9 @@ const MemoryGame = ()=>{
         let availableFruits = gameData.availableFruits;
         setGameData({screen: "choose", pickedFruits, availableFruits})
     }
-    if(gameData.screen === "start"){
+
+    let currentScreen = ()=>{
+        if(gameData.screen === "start"){
             return <StartScreen handler = {startGame}></StartScreen>
     } else if(gameData.screen === "choose"){
         return <ChooseScreen handler = {fruitChoosen} data = {gameData}></ChooseScreen>
@@ -83,6 +123,11 @@ const MemoryGame = ()=>{
     } else if(gameData.screen === "winner"){
         return <WinnerScreen handler = {startAgain} data = {gameData}></WinnerScreen>
     }
+    }
+
+    return <div className="game">
+        {currentScreen()}
+    </div>
 }
 
 export default MemoryGame

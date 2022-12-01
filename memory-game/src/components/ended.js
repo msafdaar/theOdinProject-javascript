@@ -1,11 +1,16 @@
-let EndedScreen = (props)=>{
+import imageLoader from "./imageLoader";
+import '../styles/ended.css';
 
-    return <div> 
+let EndedScreen = (props)=>{
+    let fruit = props.data.pickedTwice;
+    return <div className="endedScreen"> 
+    <div>Oh no! you picked {fruit} twice.</div>
+    <div>{imageLoader(fruit)}</div>
+    <div className="title">Game Over</div>
+    <div className="score">
     Your Score: {props.data.score}
-    <br></br>
-    Picked Twice: {props.data.pickedTwice}
-    <br></br>
-    <button onClick={props.handler}>Ok</button>
+    </div>
+    <button onClick={props.handler}>Play Again</button>
     </div>
 }
 
