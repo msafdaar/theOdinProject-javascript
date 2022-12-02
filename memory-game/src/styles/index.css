@@ -10,6 +10,7 @@ body{
     height: 300px;
     display: flex;
     font-family: sans-serif;
+    border-radius: 5px;
 }
 
 .logo{
@@ -30,6 +31,32 @@ body{
     font-size: 16px;
     border-radius: 5px;
     color: white;
-    background-color: rgb(209, 27, 154);
+    background-color: rgb(13, 145, 105);
     font-weight: bold;
+}
+
+.creditsContainer{
+    margin-top: 50px;
+}
+.credits{
+    padding: 3px 0;
+}
+
+.credits a{
+    color: rgb(170, 115, 12);
+    font-weight: bold;
+    font-family: Calibri;
+    text-decoration: none;
+}
+
+.rules{
+    background-color: rgb(249, 250, 198);
+    width: 95%;
+    padding: 10px 5px;
+    border-radius: 6px;
+    border: 2px solid rgb(223, 208, 0);
+    margin-bottom: 10px;
+}
+.rules p{
+    margin-top: 5px
 }

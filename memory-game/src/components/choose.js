@@ -14,7 +14,9 @@ let ChooseScreen = (props)=>{
     mixedArray = mixedArray.filter(e => e !== arrayForRender[0]);
     //select 8 more fruits from mixed array
     arrayForRender = arrayForRender.concat(getUniqueRandoms(mixedArray,8));
-
+    //shuffle the array again
+    arrayForRender = getUniqueRandoms(arrayForRender,9)
+    
     return <div className="chooseScreen">
     <div className="imagesContainer">
     {arrayForRender.map((fruit, index)=>{

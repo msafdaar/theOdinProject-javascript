@@ -86,7 +86,7 @@ const MemoryGame = ()=>{
                 console.log("Picked "+ choice)
                 let pickedFruits = gameData.pickedFruits.slice().concat(choice);
                 let availableFruits = gameData.availableFruits.filter(f => f !== choice);
-                setGameData({screen: "correct", pickedFruits, availableFruits})
+                setGameData({screen: "choose", pickedFruits, availableFruits})
 
 
             }

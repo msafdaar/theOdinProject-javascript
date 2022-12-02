@@ -2,7 +2,7 @@ import '../styles/start.css';
 let StartScreen = (props)=>{
     return <div className="startScreen"> 
     <div className="selection">
-    <p>Choose difficulty to start playing</p>
+    <p>Choose a difficulty to start playing</p>
     <div className="difficulty" data-difficulty= "easy" onClick={props.handler}>
     <div className="title">Easy</div>
     <div className="description">Pick  9 items to win</div>
@@ -16,9 +16,6 @@ let StartScreen = (props)=>{
     <div className="description">Pick 30 items to win</div>
     </div>
     </div>
-    <p>Rules are simple;</p>
-    <p>• Pick fruits and veggies to get score.</p>
-    <p>• Do not pick anything twice.</p>
     </div>
 }
 
