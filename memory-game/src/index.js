@@ -8,8 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('main'));
 root.render(
   <div>
   <div className='logo'>
-  <h1 className='logoTitle'>Memory Game</h1>
-  <p className='logoDescription'>fruits and veggies</p>
+  <h1 className='logoTitle'>Pick & Remember</h1>
   </div>
   
   <div className='rules'>
