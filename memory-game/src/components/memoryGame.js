@@ -119,7 +119,7 @@ const MemoryGame = ()=>{
     } else if(gameData.screen === "correct"){
         return <CorrectScreen handler = {chooseAgain} data = {gameData}></CorrectScreen>
     } else if(gameData.screen === "winner"){
-        return <WinnerScreen handler = {startAgain} ></WinnerScreen>
+        return <WinnerScreen handler = {startAgain} data = {gameData}></WinnerScreen>
     }
     }
 
