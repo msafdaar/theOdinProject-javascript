@@ -7,11 +7,9 @@ import CorrectScreen from "./correct";
 import WinnerScreen from "./winner";
 
 const MemoryGame = ()=>{
-    // let allFruits = ["a","b","c","d","e","f","g","h","i", "j"];
-    // let pickedFruits = [""];
-    // let availableFruits = allFruits.slice();
     
     let [gameData, setGameData] = useState({screen:"start"});
+    let [showThree, setShowThree] = useState(false)
       
     let startGame = (e)=>{
         //assign available fruits according to difficulty selected.
@@ -20,9 +18,9 @@ const MemoryGame = ()=>{
         if(difficulty === "easy"){
             fruitsQty = 9;
         }else if(difficulty === "normal"){
-            fruitsQty = 15;
+            fruitsQty = 16;
         } else if(difficulty === "hard"){
-            fruitsQty = 30;
+            fruitsQty = 36;
         }
 
         let allFruits = [
@@ -113,15 +111,15 @@ const MemoryGame = ()=>{
 
     let currentScreen = ()=>{
         if(gameData.screen === "start"){
-            return <StartScreen handler = {startGame}></StartScreen>
+            return <StartScreen handler = {startGame} showThree = {showThree} setShowThree = {setShowThree}></StartScreen>
     } else if(gameData.screen === "choose"){
-        return <ChooseScreen handler = {fruitChoosen} data = {gameData}></ChooseScreen>
+        return <ChooseScreen handler = {fruitChoosen} data = {gameData} showThree = {showThree}></ChooseScreen>
     } else if(gameData.screen === "ended"){
         return <EndedScreen handler = {startAgain} data = {gameData}></EndedScreen>
     } else if(gameData.screen === "correct"){
         return <CorrectScreen handler = {chooseAgain} data = {gameData}></CorrectScreen>
     } else if(gameData.screen === "winner"){
-        return <WinnerScreen handler = {startAgain} data = {gameData}></WinnerScreen>
+        return <WinnerScreen handler = {startAgain} ></WinnerScreen>
     }
     }
 

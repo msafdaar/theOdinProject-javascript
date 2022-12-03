@@ -9,12 +9,15 @@ let StartScreen = (props)=>{
     </div>
     <div className="difficulty" data-difficulty= "normal" onClick={props.handler}>
     <div className="title">Normal</div>
-    <div className="description">Pick 15 items to win</div>
+    <div className="description">Pick 16 items to win</div>
     </div>
     <div className="difficulty" data-difficulty= "hard" onClick={props.handler}>
     <div className="title">Hard</div>
-    <div className="description">Pick 30 items to win</div>
+    <div className="description">Pick 36 items to win</div>
     </div>
+    <label> 
+    <input type="checkbox" checked= {props.showThree} onChange={(e)=>{props.setShowThree(e.target.checked)}}></input> 3x3 Display
+    </label>
     </div>
     </div>
 }
