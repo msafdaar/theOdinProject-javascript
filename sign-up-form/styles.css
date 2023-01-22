@@ -10,7 +10,7 @@ body{
   --grey-color: #888888;
 }
 .imageContainer{
-  background-image: url("kent-tupas-WaUcTYPfiCU-unsplash.jpg");
+  background-image: url("kent-tupas-WaUcTYPfiCU-unsplash_low.jpg");
   background-size: cover;
   flex: 1 1 200px;
 
