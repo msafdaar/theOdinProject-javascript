@@ -45,9 +45,15 @@
           <input type="password" required>
         </div>
       </div>
-      <button type="submit">Sign Up</button>
+      <button type="submit" onclick="submitForm()">Sign Up</button>
       <p>Already have an account? <a href="#">Log in</a></p>
     </form>
   </div>
+
+  <script>
+    function submitForm(){
+      document.querySelector('form').classList.add('submitted')
+    }
+  </script>
 </body>
 </html>
