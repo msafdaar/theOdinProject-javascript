@@ -1,23 +1,43 @@
 <html>
 <head>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="output.css">
 </head>
 <body>
 
-<h1>THE LIBRARY</h1>
-<h2 id="addBook" onclick="toggelForm()">Add a new Book</h2>
-<form action="javascript:void(0);" id="new_book_form" >
-    <label for="input_title">Title: </label><input type="text" id="input_title" autocomplete="off">
-    <label for="input_author">Author: </label><input type="text" id="input_author" autocomplete="off"> 
-    <label for="input_pages">Pages: </label><input type="number" id="input_pages" autocomplete="off">
-    <div>
-    Have you read this book? <br>
-    <input type="radio" id ="read_true" name="book_status" value="true"><label for="read_true">Yes</label>
-    <input type="radio" id ="read_false" name="book_status" value="false"><label for="read_false">No</label>
-    </div>
-    <input type="submit" value="Add Book" onclick="library.addBook()">
-    <hr>
+<h1>Favourite Books Collection</h1>
+<div class="hidden fixed top-0 left-0 w-full h-full bg-black/25 backdrop-blur-sm">
+    <form action="javascript:void(0)" class="bg-slate-50 p-7 border border-slate-600 w-96 mx-auto relative top-6 rounded-md">
+        <h2 class="text-2xl">Add new book</h2>
+        <div class="flex flex-col mt-3">
+            <label for="input_title">Title: </label>
+            <input type="text" id="input_title" autocomplete="off" class="border p-1 ">
+        </div>
+        <div class="flex flex-col mt-3">
+            <label for="input_author">Author: </label>
+            <input type="text" id="input_author" autocomplete="off" class="border p-1 "> 
+        </div>
+        <div class="flex flex-col mt-3">
+            <label for="input_pages">Pages: </label>
+            <input type="number" id="input_pages" autocomplete="off" class="border p-1 ">
+        </div>
+        <div class="flex flex-col mt-3">
+            <div>
+                Have you finished this book?
+            </div>
+            <div class="flex flex-row mt-2">
+                <div>
+                    <input type="radio" id ="read_true" name="book_status" value="true">
+                    <label for="read_true">Yes</label>
+                </div>
+                <div class="ml-5">
+                    <input type="radio" id ="read_false" name="book_status" value="false">
+                    <label for="read_false">No</label>
+                </div>
+            </div>
+        </div>
+<input type="submit" onclick="library.addBook()" class="hover:bg-blue-200 px-4 py-2 rounded-md font-semibold hover:text-blue-900 border mt-3 bg-blue-700 text-blue-100 active:ring">
 </form>
+</div>
 <div id="books_container">
 </div>
 <a href="https://malta-khan.github.io/" target="_blank" id="aboutMe">malta-khan.github.io</a>

@@ -81,3 +81,5 @@ function toggelForm() {
       x.style.display = "none";
     }
   }
+
+toggelForm();
