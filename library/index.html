@@ -1,11 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="output.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <h1>Favourite Books Collection</h1>
-<div class="hidden fixed top-0 left-0 w-full h-full bg-black/25 backdrop-blur-sm">
+<button onclick="toggelForm()">Add new book</button>
+<div id="new_book_form" class="hidden fixed top-0 left-0 w-full h-full bg-black/25 backdrop-blur-sm">
     <form action="javascript:void(0)" class="bg-slate-50 p-7 border border-slate-600 w-96 mx-auto relative top-6 rounded-md">
         <h2 class="text-2xl">Add new book</h2>
         <div class="flex flex-col mt-3">
@@ -35,11 +41,11 @@
                 </div>
             </div>
         </div>
-<input type="submit" onclick="library.addBook()" class="hover:bg-blue-200 px-4 py-2 rounded-md font-semibold hover:text-blue-900 border mt-3 bg-blue-700 text-blue-100 active:ring">
+<input type="submit" value="Add" onclick="library.addBook()" class="hover:bg-blue-200 px-4 py-2 rounded-md font-semibold hover:text-blue-900 border mt-3 bg-blue-700 text-blue-100 active:ring">
 </form>
 </div>
-<div id="books_container">
-</div>
+<table id="books_container">
+</table>
 <a href="https://malta-khan.github.io/" target="_blank" id="aboutMe">malta-khan.github.io</a>
 <script src="script.js"></script>
 </body>

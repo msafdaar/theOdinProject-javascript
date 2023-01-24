@@ -14,6 +14,7 @@ class Library{
     }
 
     addBook(){
+    toggelForm()
     let author = document.getElementById("input_author").value;
     let title = document.getElementById("input_title").value;
     let pages = document.getElementById("input_pages").value;
@@ -30,8 +31,17 @@ class Library{
     }
 
     displayAllBooks(){
-    //add header row manually
-    document.getElementById("books_container").innerHTML = `<div class="book book-header"><div class="book-title">Title</div> <div class="book-author"> Author</div> <div class="book-pages">Pages</div> <div class="book-status">Status</div> <div class="book-action">Action</div></div>`
+    //add header row
+    document.getElementById("books_container").innerHTML = `
+    <tr class="book book-header">
+    <th class="book-title">Title</th>
+    <th class="book-author"> Author</th>
+    <th class="book-pages">Pages</th>
+    <th class="book-status">Status</th>
+    <th class="book-action">Action</th>
+    </tr>`
+    
+    //then add data rows with another function
     this.storage.forEach((book,index) => {this.displaySingleBook(book, index)})    
     }
 
@@ -42,14 +52,17 @@ class Library{
         } else if(book.read == "NOT READ"){
             statusClass = "book-new"
         }
-        let bookDiv = document.createElement("div");
+        let bookDiv = document.createElement("tr");
         bookDiv.classList.add("book");
         bookDiv.innerHTML = `
-        <div class="book-title">${book.title}</div>
-        <div class="book-author">${book.author}</div>
-        <div class="book-pages">${book.pages}</div>
-        <div class="book-status ${statusClass}">${book.read}</div>
-        <div class="book-action"><button onclick = "library.changeStatus(event)" data-reference="${buttonReference}">Change Status</button><button onclick = "library.deleteBook(event)" data-reference="${buttonReference}">Delete Book</button></div>`;
+        <td class="book-title">${book.title}</td>
+        <td class="book-author">${book.author}</td>
+        <td class="book-pages">${book.pages}</td>
+        <td class="book-status ${statusClass}">${book.read}</td>
+        <td class="book-action">
+            <button onclick = "library.changeStatus(event)" data-reference="${buttonReference}">Change Status</button>
+            <button onclick = "library.deleteBook(event)" data-reference="${buttonReference}">Delete Book</button>
+        </td>`;
         document.getElementById("books_container").appendChild(bookDiv);
     }
 
@@ -75,9 +88,5 @@ library.displayAllBooks();
 
 function toggelForm() {
     var x = document.getElementById("new_book_form");
-    if (x.style.display === "none") {
-      x.style.display = "flex";
-    } else {
-      x.style.display = "none";
-    }
-  }
+    x.classList.toggle("hidden")
+}
