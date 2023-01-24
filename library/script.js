@@ -14,6 +14,7 @@ class Library{
     }
 
     addBook(){
+    toggelForm()
     let author = document.getElementById("input_author").value;
     let title = document.getElementById("input_title").value;
     let pages = document.getElementById("input_pages").value;
@@ -27,29 +28,43 @@ class Library{
     };
     this.storage.push(new Book(title, author, pages, status));
     this.displayAllBooks();    
+
+    document.querySelector("form").reset();
     }
 
     displayAllBooks(){
-    //add header row manually
-    document.getElementById("books_container").innerHTML = `<div class="book book-header"><div class="book-title">Title</div> <div class="book-author"> Author</div> <div class="book-pages">Pages</div> <div class="book-status">Status</div> <div class="book-action">Action</div></div>`
+    //add header row
+    document.getElementById("books_container").innerHTML = `
+    <tr>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400" >Title</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400" >Author</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 w-10" >Pages</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 w-10" >Status</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 w-10" >Action</th>
+    </tr>`
+    
+    //then add data rows with another function
     this.storage.forEach((book,index) => {this.displaySingleBook(book, index)})    
     }
 
     displaySingleBook(book, buttonReference = "none"){
         let statusClass;
         if (book.read == "READ"){
-            statusClass = "book-old";
+            statusClass = "text-green-600";
         } else if(book.read == "NOT READ"){
-            statusClass = "book-new"
+            statusClass = "text-yellow-600"
         }
-        let bookDiv = document.createElement("div");
+        let bookDiv = document.createElement("tr");
         bookDiv.classList.add("book");
         bookDiv.innerHTML = `
-        <div class="book-title">${book.title}</div>
-        <div class="book-author">${book.author}</div>
-        <div class="book-pages">${book.pages}</div>
-        <div class="book-status ${statusClass}">${book.read}</div>
-        <div class="book-action"><button onclick = "library.changeStatus(event)" data-reference="${buttonReference}">Change Status</button><button onclick = "library.deleteBook(event)" data-reference="${buttonReference}">Delete Book</button></div>`;
+        <td class="border p-1">${book.title}</td>
+        <td class="border p-1">${book.author}</td>
+        <td class="border p-1 font-mono">${book.pages}</td>
+        <td class="border p-1 ${statusClass}">${book.read}</td>
+        <td class="border p-1 flex flex-col text-xs">
+            <button class="border bg-slate-200 active:ring text-slate-900" onclick = "library.changeStatus(event)" data-reference="${buttonReference}">Toggel Status</button>
+            <button class="border bg-slate-200 active:ring text-slate-900 mt-1" onclick = "library.deleteBook(event)" data-reference="${buttonReference}">Delete Book</button>
+        </td>`;
         document.getElementById("books_container").appendChild(bookDiv);
     }
 
@@ -75,11 +90,5 @@ library.displayAllBooks();
 
 function toggelForm() {
     var x = document.getElementById("new_book_form");
-    if (x.style.display === "none") {
-      x.style.display = "flex";
-    } else {
-      x.style.display = "none";
-    }
-  }
-
-toggelForm();
+    x.classList.toggle("hidden")
+}

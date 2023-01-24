@@ -1,26 +1,66 @@
-<html>
-<head>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>THE LIBRARY</h1>
-<h2 id="addBook" onclick="toggelForm()">Add a new Book</h2>
-<form action="javascript:void(0);" id="new_book_form" >
-    <label for="input_title">Title: </label><input type="text" id="input_title" autocomplete="off">
-    <label for="input_author">Author: </label><input type="text" id="input_author" autocomplete="off"> 
-    <label for="input_pages">Pages: </label><input type="number" id="input_pages" autocomplete="off">
-    <div>
-    Have you read this book? <br>
-    <input type="radio" id ="read_true" name="book_status" value="true"><label for="read_true">Yes</label>
-    <input type="radio" id ="read_false" name="book_status" value="false"><label for="read_false">No</label>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - Books Collection - malta-khan.github.io</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+
+<body class="w-full">
+    <div id="new_book_form" class="hidden fixed top-0 left-0 w-full h-full bg-black/25 backdrop-blur-sm">
+        <form action="javascript:void(0)"
+        class="w-80 bg-slate-50 p-7 border border-slate-600 mx-auto relative top-6 rounded-md">
+        <h2 class="text-2xl">Add new book</h2>
+        <div class="flex flex-col mt-3">
+                <label for="input_title">Title: </label>
+                <input type="text" id="input_title" autocomplete="off" class="border p-1 ">
+            </div>
+            <div class="flex flex-col mt-3">
+                <label for="input_author">Author: </label>
+                <input type="text" id="input_author" autocomplete="off" class="border p-1 ">
+            </div>
+            <div class="flex flex-col mt-3">
+                <label for="input_pages">Pages: </label>
+                <input type="number" id="input_pages" autocomplete="off" class="border p-1 ">
+          </div>
+            <div class="flex flex-col mt-3">
+                <div>
+                    Have you finished this book?
+                </div>
+                <div class="flex flex-row mt-2">
+                    <div>
+                        <input type="radio" id="read_true" name="book_status" value="true">
+                        <label for="read_true">Yes</label>
+                    </div>
+                    <div class="ml-5">
+                        <input type="radio" id="read_false" name="book_status" value="false">
+                        <label for="read_false">No</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button onclick="toggelForm()" class="px-4 py-2 rounded-md font-semibold border mt-3 bg-slate-700 text-slate-50 hover:bg-slate-50 hover:text-slate-700 active:ring text-md">cancel</button>
+                <button onclick="library.addBook()" class="px-4 py-2 rounded-md font-semibold border mt-3 bg-blue-700 text-slate-50 hover:bg-slate-50 hover:text-slate-700 active:ring text-md">Add book</button>
+            </div>
+        </form>
     </div>
-    <input type="submit" value="Add Book" onclick="library.addBook()">
-    <hr>
-</form>
-<div id="books_container">
+    <div class="max-w-2xl p-3 mx-auto">
+        <div class="flex flex-col">
+            <h1 class="text-2xl mt-2">Favourite Books Collection</h1>
+            <div class="self-end">
+                <button onclick="toggelForm()" class="active:ring text-md text-blue-700 font-bold text-right mt-6 mb-1 underline">Add book to table</button>
+            </div>
+    </div>
+    <table id="books_container" class="border-2 w-full">
+    </table>
+    <div class="text-center mt-4">Coded by 
+        <a class="text-orange-500 font-bold underline hover:text-orange-700" href="https://malta-khan.github.io/" target="_blank" id="aboutMe">malta</a>
+    </div>
 </div>
-<a href="https://malta-khan.github.io/" target="_blank" id="aboutMe">malta-khan.github.io</a>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
