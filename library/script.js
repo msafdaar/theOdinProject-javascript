@@ -10,7 +10,21 @@ class Library{
 
     constructor(){
     //default books
-    this.storage = [new Book("A Game of Thrones", "George R. R. Martin", 694, "READ"),new Book("A Clash of Kings", "George R. R. Martin", 761, "NOT READ"),new Book("A Storm of Swords", "George R. R. Martin", 973, "NOT READ")];
+    this.storage = [
+        new Book("A Game of Thrones", "George R. R. Martin", 694, "Yes"),
+        new Book("A Clash of Kings", "George R. R. Martin", 761, "No"),
+        new Book("A Storm of Swords", "George R. R. Martin", 973, "No"),
+        new Book("Fire & Blood", "George R. R. Martin", 973, "No"),
+        new Book("The Winds of Winter", "George R. R. Martin", 973, "No"),
+        new Book("A Dance with Dragons", "George R. R. Martin", 973, "No"),
+        new Book("The Rise of the Dragon: An Illustrated History", "George R. R. Martin", 973, "No"),
+        new Book("A Dream of Spring", "George R. R. Martin", 973, "No"),
+        new Book("A Knight of the Seven Kingdoms", "George R. R. Martin", 973, "No"),
+        new Book("A Feast for Crows", "George R. R. Martin", 973, "No"),
+        new Book("The Princess and the Queen", "George R. R. Martin", 973, "No"),
+        new Book("The Ice Dragon", "George R. R. Martin", 973, "No"),
+        new Book("Tales of Dunk and Egg", "George R. R. Martin", 973, "No"),
+    ];
     }
 
     addBook(){
@@ -22,9 +36,9 @@ class Library{
     let notReadRadio = document.getElementById("read_false");
     let status;
     if (readRadio.checked){
-        status = "READ";
+        status = "Yes";
     } else if (notReadRadio.checked){
-        status = "NOT READ"
+        status = "No"
     };
     this.storage.push(new Book(title, author, pages, status));
     this.displayAllBooks();    
@@ -36,11 +50,12 @@ class Library{
     //add header row
     document.getElementById("books_container").innerHTML = `
     <tr>
-    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400" >Title</th>
-    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400" >Author</th>
-    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 w-10" >Pages</th>
-    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 w-10" >Status</th>
-    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 w-10" >Action</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 " >Title</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 " >Author</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 " >Pages</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 " >Read</th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 " ></th>
+    <th class="text-left bg-slate-200 pt-4 pb-2 px-2 border border-slate-400 " ></th>
     </tr>`
     
     //then add data rows with another function
@@ -49,31 +64,34 @@ class Library{
 
     displaySingleBook(book, buttonReference = "none"){
         let statusClass;
-        if (book.read == "READ"){
-            statusClass = "text-green-600";
-        } else if(book.read == "NOT READ"){
-            statusClass = "text-yellow-600"
+        if (book.read == "Yes"){
+            statusClass = "bg-green-100";
+        } else if(book.read == "No"){
+            statusClass = "bg-yellow-100"
         }
         let bookDiv = document.createElement("tr");
         bookDiv.classList.add("book");
         bookDiv.innerHTML = `
-        <td class="border p-1">${book.title}</td>
-        <td class="border p-1">${book.author}</td>
-        <td class="border p-1 font-mono">${book.pages}</td>
-        <td class="border p-1 ${statusClass}">${book.read}</td>
-        <td class="border p-1 flex flex-col text-xs">
-            <button class="border bg-slate-200 active:ring text-slate-900" onclick = "library.changeStatus(event)" data-reference="${buttonReference}">Toggel Status</button>
-            <button class="border bg-slate-200 active:ring text-slate-900 mt-1" onclick = "library.deleteBook(event)" data-reference="${buttonReference}">Delete Book</button>
-        </td>`;
+        <td class="border border-slate-500 p-1 ${statusClass}">${book.title}</td>
+        <td class="border border-slate-500 p-1 ${statusClass}">${book.author}</td>
+        <td class="border border-slate-500 p-1 font-mono ${statusClass}">${book.pages}</td>
+        <td class="border border-slate-500 p-1 ${statusClass}">${book.read}</td>
+        <td class="border border-slate-500 text-xs hover:bg-slate-100  active:bg-blue-200">
+            <button class="underline w-full h-full p-1" onclick = "library.changeStatus(event)" data-reference="${buttonReference}">Toggel Read</button>
+        </td>
+        <td class="border border-slate-500 text-xs hover:bg-slate-100  active:bg-red-400">
+            <button class="underline w-full h-full p-1" onclick = "library.deleteBook(event)" data-reference="${buttonReference}">Delete Book</button>
+        </td>
+        `
         document.getElementById("books_container").appendChild(bookDiv);
     }
 
     changeStatus(event){
         let index = parseInt(event.target.dataset.reference, 10);
-        if(this.storage[index].read == "READ"){
-            this.storage[index].read = "NOT READ";
+        if(this.storage[index].read == "Yes"){
+            this.storage[index].read = "No";
         } else {
-            this.storage[index].read = "READ"
+            this.storage[index].read = "Yes"
         }
         this.displayAllBooks();
     }
