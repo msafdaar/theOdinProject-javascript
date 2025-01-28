@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/malta-khan/RESTAURANT-PAGE.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/malta-khan/RESTAURANT-PAGE/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/malta-khan/RESTAURANT-PAGE#readme",
+  "homepage": "",
   "devDependencies": {
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"

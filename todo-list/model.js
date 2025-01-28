@@ -41,7 +41,7 @@ let model = (() => {
             },
             {
                 "title": "About",
-                "description": "Designed and developed by Malta Khan.",
+                "description": "Designed and developed by Safdar.",
                 "group": "welcome",
                 "dueDate": "2022-05-04",
                 "priority": "low",

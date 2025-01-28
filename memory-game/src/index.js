@@ -20,7 +20,7 @@ root.render(
 <MemoryGame></MemoryGame>
 
   <div className='creditsContainer'> 
-  <div className='credits'>Coded by <a target="_blank" href='https://malta-khan.github.io/'>Malta</a></div>
+  <div className='credits'>Coded by <a target="_blank" href='https://msafdaar.github.io/'>Safdar</a></div>
   <div className='credits'>Project idea from <a target="_blank" href='https://www.theodinproject.com/lessons/node-path-javascript-memory-card'>The Odin Project</a></div>
   <div className='credits'>Fruit images from <a target="_blank" href='https://onlymyenglish.com/fruits-and-vegetables-names/'>onlymyenglish.com</a></div>
   </div>
